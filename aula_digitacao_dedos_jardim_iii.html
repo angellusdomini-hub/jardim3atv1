@@ -1,141 +1,1502 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Atividade Ampliada - Mouse e Teclado - Infantil 5</title>
-<style>
-  :root{
-    --azul:#3b82f6; --verde:#22c55e; --amarelo:#facc15; --rosa:#fb7185; --roxo:#a855f7; --laranja:#fb923c; --cinza:#f4f4f5; --texto:#1f2937;
-  }
-  *{box-sizing:border-box}
-  body{margin:0;font-family:Arial, Helvetica, sans-serif;background:linear-gradient(135deg,#e0f2fe,#fef3c7,#fce7f3);color:var(--texto);min-height:100vh;}
-  header{background:white;border-bottom:5px solid var(--azul);padding:14px 18px;text-align:center;box-shadow:0 3px 10px rgba(0,0,0,.08)}
-  header h1{margin:0;font-size:24px;color:#0f172a} header p{margin:4px 0;font-weight:bold;font-size:15px}
-  main{max-width:1120px;margin:18px auto;padding:0 14px 30px}
-  .card{background:rgba(255,255,255,.96);border-radius:22px;padding:20px;margin:14px 0;box-shadow:0 8px 24px rgba(0,0,0,.10);border:2px solid white}
-  .hidden{display:none!important}.center{text-align:center}.big{font-size:30px;font-weight:900}.small{font-size:14px}.muted{color:#64748b}.row{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;align-items:center}
-  button{border:0;border-radius:18px;padding:14px 22px;font-size:18px;font-weight:800;cursor:pointer;background:#2563eb;color:white;box-shadow:0 5px 0 #1e40af;transition:.1s;touch-action:manipulation}
-  button:active{transform:translateY(4px);box-shadow:0 1px 0 #1e40af} button.secondary{background:#64748b;box-shadow:0 5px 0 #334155} button.success{background:#16a34a;box-shadow:0 5px 0 #166534} button.warn{background:#f97316;box-shadow:0 5px 0 #c2410c} button:disabled{background:#cbd5e1;box-shadow:none;cursor:not-allowed;color:#64748b}
-  .student-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px;margin-top:18px}.student{font-size:21px;min-height:76px;border:4px solid transparent;color:white}.student.selected{outline:6px solid #111827;transform:scale(1.03)}
-  .progress{height:18px;background:#e5e7eb;border-radius:20px;overflow:hidden;margin:15px 0}.bar{height:100%;width:0;background:linear-gradient(90deg,#22c55e,#3b82f6,#a855f7);transition:.3s}.phase-title{font-size:26px;font-weight:900;margin:0 0 6px;text-align:center}.phase-sub{font-size:17px;text-align:center;margin-top:0}.timer{font-size:18px;font-weight:800;text-align:center;background:#fff7ed;border:2px dashed #fb923c;border-radius:15px;padding:8px;margin:10px auto;max-width:520px}
-  .click-area{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;max-width:820px;margin:20px auto}.shape{height:108px;border-radius:28px;font-size:42px;display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer;border:5px solid rgba(255,255,255,.8);box-shadow:0 8px 14px rgba(0,0,0,.15);user-select:none}.shape.ok{animation:pop .35s ease;background:#bbf7d0!important}.shape.no{animation:shake .25s ease}.red{background:#ef4444;color:white}.blue{background:#3b82f6;color:white}.yellow{background:#facc15}.green{background:#22c55e;color:white}.purple{background:#a855f7;color:white}.orange{background:#fb923c;color:white}.pink{background:#fb7185;color:white}
-  @keyframes pop{50%{transform:scale(1.12)}} @keyframes shake{25%{transform:translateX(-7px)}75%{transform:translateX(7px)}}
-  .target-box{min-height:150px;border:5px dashed #94a3b8;border-radius:25px;background:#f8fafc;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:bold;padding:10px;min-width:190px}.target-box.hover{background:#dbeafe;border-color:#2563eb}.drag-item{width:105px;height:105px;border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:45px;font-weight:900;cursor:grab;user-select:none;box-shadow:0 8px 14px rgba(0,0,0,.18)}
-  .select-name{font-size:38px;font-weight:900;letter-spacing:4px;padding:18px;border-radius:22px;background:#f1f5f9;display:inline-block;margin:8px;user-select:text;border:3px dashed #64748b}.select-card{font-size:35px;font-weight:900;letter-spacing:3px;padding:16px;border-radius:18px;background:#fff;display:inline-block;margin:8px;user-select:text;border:3px dashed #94a3b8}.name-help{font-size:18px;background:#ecfeff;border-left:8px solid #06b6d4;padding:10px;border-radius:12px;max-width:820px;margin:10px auto}.typing-box{font-size:40px;font-weight:900;text-align:center;width:190px;border:4px solid #94a3b8;border-radius:18px;padding:10px;text-transform:none}.typing-box:focus{outline:6px solid #bfdbfe;border-color:#2563eb}.keyboard-target{font-size:64px;font-weight:900;background:#fff;border-radius:26px;padding:20px 38px;border:5px solid #fde68a;display:inline-block;min-width:150px}.feedback{font-size:24px;font-weight:900;text-align:center;min-height:38px;margin-top:10px}.stars{font-size:34px;text-align:center;letter-spacing:4px}.badge{display:inline-block;border-radius:999px;padding:8px 14px;font-weight:900;background:#e0f2fe;margin:4px}.report{background:white;color:#111827}.report h2{text-align:center;margin:6px 0}.report table{width:100%;border-collapse:collapse;margin-top:12px;font-size:14px}.report th,.report td{border:1px solid #94a3b8;padding:7px;text-align:left}.report th{background:#dbeafe}.no-print-note{background:#fff7ed;border:2px solid #fdba74;border-radius:15px;padding:10px;margin-top:12px}.mission{background:#f8fafc;border:2px solid #dbeafe;border-radius:18px;padding:12px;margin:10px auto;max-width:850px}.mini-goal{font-size:20px;font-weight:900;background:#fef9c3;border:2px solid #facc15;border-radius:14px;padding:8px 12px;display:inline-block;margin:4px}.count-ball{width:70px;height:70px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:900;background:#e0f2fe;border:4px solid #38bdf8;cursor:pointer;user-select:none}.paintable{border:4px solid transparent}.painted{border-color:#111827!important;transform:scale(1.05)}.trail-board{height:330px;border:5px dashed #94a3b8;border-radius:24px;background:#f8fafc;position:relative;overflow:hidden;margin:12px auto;max-width:850px}.trail-dot{position:absolute;width:64px;height:64px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:900;background:#fff;border:4px solid #3b82f6;cursor:pointer;user-select:none}.trail-dot.done{background:#bbf7d0;border-color:#16a34a}.keypad{display:grid;grid-template-columns:repeat(3,80px);gap:12px;justify-content:center;margin-top:14px}.key{height:70px;font-size:32px;border-radius:18px;background:#e0f2fe;border:4px solid #60a5fa;color:#0f172a;display:flex;align-items:center;justify-content:center;font-weight:900;cursor:pointer;box-shadow:0 5px 0 #93c5fd}.key:active{transform:translateY(3px);box-shadow:0 2px 0 #93c5fd}
-  @media print{body{background:white}.no-print,button,.progress,.timer{display:none!important}main{margin:0;max-width:100%;padding:0}.card{box-shadow:none;border:0;margin:0;padding:8px}.report{font-size:12px}.report table{font-size:11px}.report h2{font-size:18px}.report h3{font-size:14px}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jardim III - Dedos no Teclado</title>
+  <style>
+    :root {
+      --ink: #203040;
+      --muted: #617181;
+      --line: #d7e4ef;
+      --blue: #2f80ed;
+      --green: #23a455;
+      --yellow: #f2bd22;
+      --red: #e64b4b;
+      --purple: #8f5bff;
+      --orange: #f27b35;
+      --pink: #e7549a;
+      --paper: #ffffff;
+      --soft: #f5fbff;
+      --shadow: 0 12px 28px rgba(32, 56, 85, .14);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(242, 189, 34, .28), transparent 24%),
+        radial-gradient(circle at 92% 14%, rgba(231, 84, 154, .18), transparent 25%),
+        radial-gradient(circle at 88% 86%, rgba(35, 164, 85, .14), transparent 24%),
+        linear-gradient(180deg, #fbfdff, #edf8ff);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .48;
+      background-image:
+        radial-gradient(circle at 7% 42%, #2f80ed 0 9px, transparent 10px),
+        radial-gradient(circle at 18% 86%, #23a455 0 8px, transparent 9px),
+        radial-gradient(circle at 92% 46%, #f27b35 0 10px, transparent 11px),
+        radial-gradient(circle at 78% 78%, #8f5bff 0 9px, transparent 10px);
+    }
+
+    button, input { font: inherit; }
+
+    .app {
+      width: min(1240px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 18px 0 28px;
+      position: relative;
+    }
+
+    header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 50px);
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    h1::before { content: "⌨ "; color: var(--blue); }
+
+    .sub {
+      margin: 8px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .teacher {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-end;
+    }
+
+    .pill {
+      border: 2px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 9px 14px;
+      font-weight: 900;
+      color: var(--muted);
+    }
+
+    .progress {
+      height: 12px;
+      background: #dfeaf4;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 10px 0 14px;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--green), var(--blue));
+      transition: width .25s ease;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 238px 1fr;
+      gap: 14px;
+      align-items: start;
+    }
+
+    nav {
+      display: grid;
+      gap: 8px;
+      position: sticky;
+      top: 12px;
+    }
+
+    .navBtn {
+      min-height: 55px;
+      border: 2px solid var(--line);
+      background: #fff;
+      border-radius: 8px;
+      padding: 9px 11px;
+      text-align: left;
+      cursor: pointer;
+      font-weight: 900;
+      color: var(--ink);
+      box-shadow: 0 4px 12px rgba(32, 56, 85, .06);
+    }
+
+    .navBtn small {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .navBtn.active {
+      border-color: var(--blue);
+      background: #eaf4ff;
+    }
+
+    .stage {
+      min-height: 670px;
+      background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(135deg, var(--blue), var(--yellow), var(--pink), var(--green)) border-box;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .screen {
+      display: none;
+      min-height: 670px;
+      padding: 20px;
+    }
+
+    .screen.active { display: block; }
+
+    .screenHead {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 2px solid #eef3f7;
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      background: linear-gradient(90deg, rgba(234,246,255,.82), rgba(255,247,217,.74));
+      margin: -20px -20px 16px;
+      padding: 18px 20px 15px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(24px, 3vw, 35px);
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .hint {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .badge {
+      flex: 0 0 auto;
+      min-width: 92px;
+      text-align: center;
+      border-radius: 8px;
+      padding: 10px;
+      color: #fff;
+      background: var(--purple);
+      font-weight: 900;
+      font-size: 22px;
+    }
+
+    .action {
+      min-height: 48px;
+      border: 0;
+      border-radius: 8px;
+      background: var(--ink);
+      color: #fff;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: 900;
+    }
+
+    .action.secondary {
+      background: #fff;
+      color: var(--ink);
+      border: 2px solid var(--line);
+    }
+
+    .btnRow, .footerNav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-top: 16px;
+    }
+
+    .footerNav { justify-content: space-between; }
+
+    .note {
+      border-radius: 8px;
+      background: #fff7d9;
+      border: 2px solid #f4d56f;
+      padding: 14px;
+      margin-top: 14px;
+      font-size: 20px;
+      font-weight: 900;
+      color: #604a00;
+    }
+
+    .twoCol, .practiceGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .panel {
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: #fbfdff;
+      padding: 16px;
+      min-height: 300px;
+    }
+
+    .welcome {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: 14px;
+      align-items: center;
+      border: 3px solid #fff;
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 14px;
+      background:
+        radial-gradient(circle at 10% 18%, rgba(255,255,255,.72), transparent 18%),
+        linear-gradient(135deg, #2f80ed, #8f5bff 48%, #e7549a);
+      color: #fff;
+      box-shadow: 0 10px 20px rgba(32, 56, 85, .16);
+    }
+
+    .welcomeTitle {
+      font-size: clamp(30px, 5vw, 54px);
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .welcomeText {
+      margin-top: 8px;
+      font-size: 21px;
+      font-weight: 900;
+    }
+
+    .rainbow {
+      height: 122px;
+      border-radius: 90px 90px 8px 8px;
+      background:
+        radial-gradient(ellipse at 50% 100%, #fff 0 28px, transparent 29px),
+        radial-gradient(ellipse at 50% 100%, transparent 0 36px, #23a455 37px 48px, transparent 49px),
+        radial-gradient(ellipse at 50% 100%, transparent 0 52px, #f2bd22 53px 64px, transparent 65px),
+        radial-gradient(ellipse at 50% 100%, transparent 0 68px, #e64b4b 69px 82px, transparent 83px),
+        radial-gradient(ellipse at 50% 100%, transparent 0 86px, #ffffff 87px 100px, transparent 101px);
+      background-color: rgba(255,255,255,.18);
+      border: 3px solid rgba(255,255,255,.72);
+    }
+
+    .playPanel {
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.94), rgba(255,255,255,.99)),
+        repeating-linear-gradient(45deg, rgba(47,128,237,.08) 0 12px, rgba(242,189,34,.08) 12px 24px);
+    }
+
+    .mascot {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 12px;
+      align-items: center;
+      border: 2px solid #f4d56f;
+      border-radius: 8px;
+      background: #fff7d9;
+      padding: 12px;
+      margin-bottom: 14px;
+      font-weight: 900;
+      color: #604a00;
+      font-size: 20px;
+    }
+
+    .mascotFace {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: var(--yellow);
+      border: 5px solid #fff;
+      box-shadow: 0 6px 16px rgba(32, 56, 85, .14);
+      position: relative;
+    }
+
+    .mascotFace::before,
+    .mascotFace::after {
+      content: "";
+      position: absolute;
+      top: 25px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--ink);
+    }
+
+    .mascotFace::before { left: 22px; }
+    .mascotFace::after { right: 22px; }
+
+    .smile {
+      position: absolute;
+      left: 24px;
+      top: 42px;
+      width: 30px;
+      height: 16px;
+      border-bottom: 5px solid var(--ink);
+      border-radius: 0 0 30px 30px;
+    }
+
+    .nameCloud {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+
+    .nameCard {
+      width: 100%;
+      min-height: 92px;
+      border: 3px solid #fff;
+      border-radius: 8px;
+      background: #fff;
+      display: grid;
+      grid-template-columns: 76px minmax(0, 1fr);
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      box-shadow: 0 8px 18px rgba(32, 56, 85, .1);
+      position: relative;
+      overflow: hidden;
+      cursor: default;
+      text-align: left;
+    }
+
+    button.nameCard {
+      cursor: pointer;
+    }
+
+    button.nameCard:focus {
+      outline: 5px solid rgba(47, 128, 237, .25);
+      border-color: var(--blue);
+    }
+
+    .nameCard::after {
+      content: "★";
+      position: absolute;
+      right: 10px;
+      top: 6px;
+      color: rgba(242, 189, 34, .72);
+      font-size: 24px;
+    }
+
+    .nameCard.active {
+      border-color: var(--blue);
+      background: #eaf4ff;
+      box-shadow: inset 0 0 0 4px #fff;
+    }
+
+    .avatar {
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 26px;
+      font-weight: 900;
+      border: 4px solid #fff;
+      box-shadow: 0 5px 12px rgba(32, 56, 85, .16);
+    }
+
+    .nameText {
+      font-size: clamp(28px, 4vw, 46px);
+      line-height: 1;
+      font-weight: 900;
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .nameText.longName {
+      font-size: clamp(25px, 3vw, 38px);
+    }
+
+    .homeRow {
+      display: grid;
+      grid-template-columns: repeat(10, minmax(58px, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .key {
+      min-height: 72px;
+      border: 3px solid #c8d8e6;
+      border-radius: 8px;
+      background: linear-gradient(180deg, #fff, #f7fbff);
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+
+    .key span {
+      display: block;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 900;
+      margin-top: 3px;
+    }
+
+    .key.active {
+      border-color: var(--blue);
+      background: #e8f3ff;
+      box-shadow: inset 0 0 0 4px #fff;
+    }
+
+    .spaceKey {
+      min-height: 72px;
+      border: 3px solid #c8d8e6;
+      border-radius: 8px;
+      background: #fff;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--ink);
+      grid-column: 3 / span 6;
+      display: grid;
+      place-items: center;
+    }
+
+    .spaceKey.active {
+      border-color: var(--orange);
+      background: #fff0e4;
+    }
+
+    svg.hand {
+      width: min(100%, 480px);
+      height: auto;
+      display: block;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      margin: 0 auto;
+    }
+
+    .fingerLabel {
+      min-height: 50px;
+      width: 100%;
+      border: 2px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 8px;
+      margin-top: 12px;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--muted);
+    }
+
+    .pictureCard {
+      display: grid;
+      grid-template-columns: 132px 1fr;
+      gap: 14px;
+      align-items: center;
+      min-height: 174px;
+    }
+
+    .picSvg {
+      width: 132px;
+      height: 132px;
+      border-radius: 8px;
+      background: #fff;
+      border: 2px solid var(--line);
+    }
+
+    .bigPrompt {
+      min-height: 116px;
+      border: 4px solid #fff;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background:
+        radial-gradient(circle at 10% 20%, rgba(242,189,34,.2), transparent 22%),
+        radial-gradient(circle at 90% 20%, rgba(231,84,154,.16), transparent 22%),
+        #fff;
+      font-size: clamp(48px, 8vw, 88px);
+      font-weight: 900;
+      color: var(--blue);
+      padding: 10px;
+      word-break: break-word;
+      box-shadow: 0 10px 20px rgba(32, 56, 85, .12);
+    }
+
+    .wordBig {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 900;
+      color: var(--ink);
+      line-height: 1;
+      word-break: break-word;
+    }
+
+    .mini {
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 800;
+      margin-top: 8px;
+    }
+
+    .typeInput {
+      width: 100%;
+      min-height: 86px;
+      border: 3px solid #b8cde0;
+      border-radius: 8px;
+      text-align: center;
+      font-size: clamp(34px, 6vw, 56px);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-top: 14px;
+      letter-spacing: 0;
+    }
+
+    .typeInput:focus {
+      outline: 4px solid rgba(47, 128, 237, .22);
+      border-color: var(--blue);
+    }
+
+    .wordGrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(180px, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .wordTile {
+      min-height: 120px;
+      border: 3px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 10px;
+      box-shadow: 0 8px 18px rgba(32, 56, 85, .1);
+    }
+
+    .wordTile.active {
+      border-color: var(--blue);
+      background: #eaf4ff;
+      box-shadow: inset 0 0 0 4px #fff;
+    }
+
+    .wordTile svg {
+      width: 76px;
+      height: 76px;
+    }
+
+    .modalBackdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 20;
+      display: none;
+      place-items: center;
+      padding: 18px;
+      background: rgba(18, 34, 49, .56);
+    }
+
+    .modalBackdrop.open {
+      display: grid;
+    }
+
+    .nameModal {
+      width: min(760px, 100%);
+      border: 4px solid #fff;
+      border-radius: 8px;
+      background:
+        radial-gradient(circle at 12% 16%, rgba(242,189,34,.26), transparent 24%),
+        radial-gradient(circle at 90% 18%, rgba(231,84,154,.2), transparent 24%),
+        #ffffff;
+      box-shadow: 0 24px 52px rgba(0, 0, 0, .25);
+      padding: 18px;
+    }
+
+    .modalName {
+      min-height: 112px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #2f80ed, #8f5bff);
+      color: #fff;
+      font-size: clamp(44px, 9vw, 82px);
+      font-weight: 900;
+      white-space: nowrap;
+      overflow: hidden;
+      padding: 10px;
+    }
+
+    .modalInput {
+      width: 100%;
+      min-height: 86px;
+      border: 3px solid #b8cde0;
+      border-radius: 8px;
+      text-align: center;
+      font-size: clamp(38px, 7vw, 62px);
+      font-weight: 900;
+      text-transform: uppercase;
+      margin-top: 14px;
+      letter-spacing: 0;
+    }
+
+    .modalInput:focus {
+      outline: 4px solid rgba(47, 128, 237, .22);
+      border-color: var(--blue);
+    }
+
+    .action:disabled {
+      opacity: .45;
+      cursor: default;
+    }
+
+    @media (max-width: 940px) {
+      header, .layout, .twoCol, .practiceGrid {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        position: static;
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .homeRow {
+        grid-template-columns: repeat(5, minmax(58px, 1fr));
+      }
+
+      .spaceKey { grid-column: 1 / -1; }
+      .screen, .stage { min-height: 0; }
+      .teacher { justify-content: flex-start; }
+    }
+
+    @media (max-width: 560px) {
+      .app { width: min(100% - 16px, 1240px); }
+      .screen { padding: 14px; }
+      nav, .wordGrid {
+        grid-template-columns: 1fr;
+      }
+      .pictureCard {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+      }
+
+      .nameText {
+        font-size: 25px;
+      }
+
+      .nameText.longName {
+        font-size: 21px;
+      }
+
+      .modalName {
+        font-size: 42px;
+      }
+    }
+
+    /* Compact desktop fit: keep each activity visible without scrolling. */
+    @media (min-width: 941px) {
+      .app { padding: 8px 0 10px; }
+      header { margin-bottom: 6px; }
+      h1 { font-size: clamp(28px, 3.2vw, 42px); }
+      .sub { margin-top: 3px; font-size: 15px; }
+      .pill { padding: 6px 10px; }
+      .progress { height: 8px; margin: 6px 0 8px; }
+      .layout { grid-template-columns: 190px 1fr; gap: 10px; }
+      nav { gap: 6px; }
+      .navBtn { min-height: 42px; padding: 6px 8px; font-size: 14px; }
+      .navBtn small { font-size: 11px; }
+      .stage { height: calc(100vh - 104px); min-height: 510px; }
+      .screen { height: 100%; min-height: 0; padding: 12px; overflow: hidden; }
+      .screenHead { margin: -12px -12px 9px; padding: 10px 12px 8px; }
+      h2 { font-size: clamp(22px, 2.4vw, 30px); }
+      .hint { font-size: 14px; margin-top: 3px; }
+      .badge { font-size: 17px; padding: 7px; min-width: 76px; }
+      .panel { min-height: 0; padding: 9px; }
+      .twoCol, .practiceGrid { gap: 9px; }
+      .note { font-size: 15px; padding: 8px; margin-top: 7px; }
+      .footerNav, .btnRow { margin-top: 7px; }
+      .action { min-height: 38px; padding: 7px 12px; }
+      .welcome { grid-template-columns: 1fr 140px; padding: 9px; margin-bottom: 7px; }
+      .welcomeTitle { font-size: clamp(28px, 3.6vw, 42px); }
+      .welcomeText { font-size: 15px; }
+      .rainbow { height: 74px; }
+      .mascot { grid-template-columns: 48px 1fr; gap: 7px; padding: 7px; margin-bottom: 7px; font-size: 15px; }
+      .mascotFace { width: 46px; height: 46px; }
+      .mascotFace::before, .mascotFace::after { top: 14px; width: 7px; height: 7px; }
+      .mascotFace::before { left: 13px; }
+      .mascotFace::after { right: 13px; }
+      .smile { left: 14px; top: 25px; width: 18px; height: 10px; border-bottom-width: 4px; }
+      .nameCloud { gap: 6px; }
+      .nameCard { min-height: 54px; grid-template-columns: 46px minmax(0, 1fr); gap: 7px; padding: 5px 8px; }
+      .avatar { width: 40px; height: 40px; font-size: 17px; }
+      .nameText { font-size: clamp(22px, 2.7vw, 34px); white-space: nowrap; }
+      .nameText.longName { font-size: clamp(19px, 2.2vw, 28px); }
+      .homeRow { grid-template-columns: repeat(10, minmax(42px, 1fr)); gap: 5px; margin-top: 6px; }
+      .key { min-height: 48px; font-size: 22px; }
+      .key span { font-size: 10px; }
+      .spaceKey { min-height: 42px; font-size: 16px; }
+      svg.hand { max-height: 160px; }
+      .fingerLabel { min-height: 34px; font-size: 15px; padding: 6px; }
+      .pictureCard { grid-template-columns: 86px 1fr; gap: 8px; min-height: 94px; }
+      .picSvg { width: 82px; height: 82px; }
+      .bigPrompt { min-height: 64px; font-size: clamp(34px, 5vw, 58px); padding: 6px; }
+      .wordBig { font-size: clamp(22px, 3.4vw, 34px); }
+      .mini { font-size: 14px; margin-top: 4px; }
+      .typeInput { min-height: 54px; font-size: clamp(26px, 4vw, 42px); margin-top: 7px; }
+      .wordGrid { gap: 6px; margin-top: 5px; grid-template-columns: repeat(2, minmax(150px, 1fr)); }
+      .wordTile { min-height: 64px; grid-template-columns: 48px 1fr; gap: 6px; padding: 5px; }
+      .wordTile svg { width: 46px; height: 46px; }
+      .modalBackdrop { padding: 12px; }
+      .nameModal { padding: 12px; }
+      .modalName { min-height: 82px; font-size: clamp(38px, 7vw, 66px); }
+      .modalInput { min-height: 58px; font-size: clamp(30px, 5vw, 50px); margin-top: 8px; }
+    }
+  </style>
 </head>
 <body>
-<header>
-  <h1>UNIVERSITAS, E-EI EF - 2026-1</h1>
-  <p>EDUC INFANTIL - INFANTIL 5 - Tarde - A</p>
-  <p>CAMPOS DE EXPERIENCIAS IV - 2º Bimestre</p>
-  <p>Atividade lúdica ampliada: mouse e teclado</p>
-</header>
-<main>
-  <section id="start" class="card center">
-    <div class="big">🌈 Missão do Computador Feliz 🖱️⌨️</div>
-    <p class="phase-sub">Escolha seu primeiro nome. Depois faça desafios curtos de clicar, clique duplo, arrastar, selecionar, pintar com clique e digitar.</p>
-    <div class="student-grid" id="studentGrid"></div>
-    <div class="mission">
-      <strong>Sequência sugerida para 30 minutos:</strong><br>
-      3 min escolha do nome e combinados • 8 min cliques • 7 min arrastar • 5 min selecionar • 7 min teclado.
-    </div>
-    <button id="startBtn" disabled>Começar</button>
-  </section>
+  <main class="app">
+    <header>
+      <div>
+        <h1>Jardim III no Teclado</h1>
+        <p class="sub">Colégio Universitas - usar o teclado, encontrar letras e copiar nomes</p>
+      </div>
+      <div class="teacher">
+        <span class="pill">40 min</span>
+        <span class="pill">Alunos: teclado</span>
+        <span class="pill" id="scoreLabel">0 estrelas</span>
+      </div>
+    </header>
 
-  <section id="game" class="card hidden">
-    <div class="progress no-print"><div id="bar" class="bar"></div></div>
-    <p id="phaseTitle" class="phase-title"></p>
-    <p id="phaseSub" class="phase-sub"></p>
-    <div id="timer" class="timer no-print"></div>
-    <div id="activity"></div>
-    <div id="feedback" class="feedback"></div>
-    <div id="stars" class="stars"></div>
-    <div class="row no-print" style="margin-top:16px">
-      <button class="secondary" id="backBtn">Voltar</button>
-      <button class="warn" id="repeatBtn">Repetir fase</button>
-      <button class="success" id="nextBtn" disabled>Próxima</button>
-    </div>
-  </section>
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
 
-  <section id="final" class="card report hidden">
-    <h2>RELATÓRIO DE PROFICIÊNCIA</h2>
-    <h3 class="center">UNIVERSITAS, E-EI EF - 2026-1</h3>
-    <p class="center"><strong>EDUC INFANTIL - INFANTIL 5 - Tarde - A</strong><br><strong>CAMPOS DE EXPERIENCIAS IV - 2º Bimestre</strong></p>
-    <table>
-      <tr><th>Aluno(a)</th><td id="rAluno"></td></tr>
-      <tr><th>Data</th><td id="rData"></td></tr>
-      <tr><th>Tempo pedagógico sugerido</th><td>30 minutos</td></tr>
-      <tr><th>Resultado geral</th><td id="rGeral"></td></tr>
-      <tr><th>Nível de proficiência</th><td id="rNivel"></td></tr>
-      <tr><th>Observação pedagógica</th><td id="rObs"></td></tr>
-    </table>
-    <h3>Desempenho por habilidade</h3>
-    <table id="rTabela"><thead><tr><th>Habilidade</th><th>Objetivo observado</th><th>Resultado</th><th>Nível</th></tr></thead><tbody></tbody></table>
-    <h3>Legenda dos níveis</h3>
-    <p><span class="badge">Iniciando</span> necessita de apoio frequente. <span class="badge">Em desenvolvimento</span> realiza com alguma ajuda. <span class="badge">Adequado</span> realiza com autonomia na maior parte das tentativas. <span class="badge">Avançado</span> realiza com autonomia, precisão e rapidez.</p>
-    <div class="no-print-note no-print">Use o botão abaixo para imprimir ou salvar em PDF.</div>
-    <div class="row no-print"><button onclick="window.print()">Imprimir / Salvar PDF</button><button class="secondary" onclick="location.reload()">Nova atividade</button></div>
-  </section>
-</main>
-<script>
-const students=[
- {full:'DERICK FELIPE SOARES TEIXEIRA', first:'DERICK', color:'#ef4444'},
- {full:'HELENA BEATRIZ PEDROSO DE LIMA', first:'HELENA', color:'#ec4899'},
- {full:'ISADORA CRISTINA TORIGOI DE ASSIS', first:'ISADORA', color:'#8b5cf6'},
- {full:'JOAQUIM DAMASCENO DE MORAES', first:'JOAQUIM', color:'#f97316'},
- {full:'MARIA CLARA MENDES DELA COLETA', first:'MARIA CLARA', color:'#22c55e'},
- {full:'MARIA HELENA MATOS STELA', first:'MARIA HELENA', color:'#06b6d4'},
- {full:'PEDRO COSTA SILVA', first:'PEDRO', color:'#3b82f6'}
-];
-let selected=null, phase=0, phaseDone=false;
-const results=[];
-const phases=[
- {key:'warmClick', title:'1. Acorde as estrelinhas', sub:'Clique em todas as estrelinhas. Treina clique simples e atenção visual.', minutes:'Tempo sugerido: 2 minutos'},
- {key:'clickColor', title:'2. Clique nas cores pedidas', sub:'Encontre a cor solicitada e clique. A cor muda a cada acerto.', minutes:'Tempo sugerido: 3 minutos'},
- {key:'clickNumbers', title:'3. Clique nos números em ordem', sub:'Clique nos números 1, 2, 3, 4 e 5 na ordem correta.', minutes:'Tempo sugerido: 3 minutos'},
- {key:'doubleAnimal', title:'4. Clique duplo no bichinho', sub:'Dê dois cliques rápidos no bichinho indicado.', minutes:'Tempo sugerido: 3 minutos'},
- {key:'trail', title:'5. Caminho do mouse', sub:'Clique nos círculos do caminho, do 1 até o 6, sem pular.', minutes:'Tempo sugerido: 3 minutos'},
- {key:'dragColor', title:'6. Arraste para a casa da cor', sub:'Arraste cada objeto para a casinha da mesma cor.', minutes:'Tempo sugerido: 4 minutos'},
- {key:'dragCount', title:'7. Arraste a quantidade', sub:'Arraste as bolinhas para o número correto.', minutes:'Tempo sugerido: 4 minutos'},
- {key:'selectName', title:'8. Selecione seu primeiro nome', sub:'Passe o mouse sobre o nome colorido como se fosse pintar o nome.', minutes:'Tempo sugerido: 3 minutos'},
- {key:'selectLetters', title:'9. Selecione letras iguais', sub:'Selecione a letra pedida entre letras coloridas.', minutes:'Tempo sugerido: 2 minutos'},
- {key:'typeUpper', title:'10. Digite letras MAIÚSCULAS', sub:'Digite a letra grande que aparece.', minutes:'Tempo sugerido: 2 minutos'},
- {key:'typeLower', title:'11. Digite letras minúsculas', sub:'Digite a letra pequena que aparece.', minutes:'Tempo sugerido: 2 minutos'},
- {key:'typeNumber', title:'12. Digite números', sub:'Digite o número que aparece.', minutes:'Tempo sugerido: 2 minutos'},
- {key:'typeMix', title:'13. Desafio final: letra e número', sub:'Copie sequências pequenas com letra maiúscula, minúscula e número.', minutes:'Tempo sugerido: 2 minutos'}
-];
-function init(){
- const grid=document.getElementById('studentGrid');
- students.forEach(s=>{const b=document.createElement('button');b.className='student';b.style.background=s.color;b.textContent=s.first;b.onclick=()=>{selected=s;document.querySelectorAll('.student').forEach(x=>x.classList.remove('selected'));b.classList.add('selected');document.getElementById('startBtn').disabled=false};grid.appendChild(b)});
- document.getElementById('startBtn').onclick=()=>{document.getElementById('start').classList.add('hidden');document.getElementById('game').classList.remove('hidden');renderPhase()};
- document.getElementById('nextBtn').onclick=nextPhase; document.getElementById('backBtn').onclick=()=>{if(phase>0){phase--;renderPhase()}}; document.getElementById('repeatBtn').onclick=renderPhase;
-}
-function renderPhase(){phaseDone=false;document.getElementById('nextBtn').disabled=true;document.getElementById('feedback').textContent='';document.getElementById('stars').textContent='';document.getElementById('bar').style.width=((phase)/phases.length*100)+'%'; const p=phases[phase]; document.getElementById('phaseTitle').textContent=p.title;document.getElementById('phaseSub').textContent=p.sub;document.getElementById('timer').textContent=p.minutes; const a=document.getElementById('activity'); a.innerHTML='';
- const map={warmClick,clickColor,clickNumbers,doubleAnimal,trail,dragColor,dragCount,selectName,selectLetters,typeUpper,typeLower,typeNumber,typeMix}; map[p.key](a);
-}
-function complete(key, skill, objective, score, max){ if(phaseDone) return; phaseDone=true; const percent=Math.max(0,Math.min(100,Math.round(score/max*100))); results[phase]={key,skill,objective,score,max,percent,level:level(percent)}; document.getElementById('feedback').textContent= percent>=70?'Muito bem! 🌟':'Boa tentativa! Pode treinar mais um pouquinho. 😊'; document.getElementById('stars').textContent='⭐'.repeat(Math.max(1,Math.ceil(percent/25))); document.getElementById('nextBtn').disabled=false; }
-function level(p){if(p<45)return 'Iniciando'; if(p<70)return 'Em desenvolvimento'; if(p<90)return 'Adequado'; return 'Avançado'}
-function nextPhase(){ if(phase<phases.length-1){phase++;renderPhase()} else showReport(); }
-function shuffle(arr){return arr.sort(()=>Math.random()-.5)}
-function warmClick(a){let ok=0; a.innerHTML='<div class="center big">Clique em 8 estrelinhas ⭐</div><div class="click-area"></div>'; const area=a.querySelector('.click-area'); for(let i=0;i<8;i++){const d=document.createElement('div');d.className='shape yellow';d.textContent='⭐';d.onclick=()=>{if(d.classList.contains('ok'))return;d.classList.add('ok');ok++; if(ok===8)complete('warmClick','Clique simples','Clicar em alvos grandes com controle do mouse.',8,8)}; area.appendChild(d)}}
-function clickColor(a){const colors=[['VERMELHO','red','🍎'],['AZUL','blue','🐟'],['AMARELO','yellow','⭐'],['VERDE','green','🌳'],['ROXO','purple','🟣'],['LARANJA','orange','🟠'],['ROSA','pink','🌸']];let target=null, ok=0, tries=0; const inst=document.createElement('div');inst.className='center big'; a.appendChild(inst); const area=document.createElement('div');area.className='click-area'; function newTarget(){target=colors[Math.floor(Math.random()*colors.length)];inst.innerHTML=`Clique na cor: <span style="color:${target[1]==='yellow'?'#ca8a04':target[1]}">${target[0]}</span>`} shuffle([...colors]).forEach(c=>{const d=document.createElement('div');d.className='shape '+c[1];d.textContent=c[2];d.onclick=()=>{tries++; if(c[0]===target[0]){ok++;d.classList.add('ok');setTimeout(()=>d.classList.remove('ok'),250); if(ok>=5) complete('clickColor','Clique e reconhecimento de cores','Localizar cor solicitada e clicar no alvo correto.', Math.max(1,7-(tries-ok)),7); else newTarget()} else {d.classList.add('no'); setTimeout(()=>d.classList.remove('no'),300)}}; area.appendChild(d)});a.appendChild(area);newTarget()}
-function clickNumbers(a){let next=1, errors=0; a.innerHTML='<div class="center big">Clique: 1 → 2 → 3 → 4 → 5</div><div class="row" style="margin-top:20px"></div>'; const nums=shuffle([1,2,3,4,5]); const row=a.querySelector('.row'); nums.forEach(n=>{const b=document.createElement('div');b.className='count-ball';b.textContent=n;b.onclick=()=>{if(n===next){b.classList.add('ok');b.style.background='#bbf7d0';next++; if(next===6)complete('clickNumbers','Sequência numérica com clique','Clicar nos numerais em ordem crescente de 1 a 5.',5-errors,5)}else{errors++;b.classList.add('no');setTimeout(()=>b.classList.remove('no'),300);document.getElementById('feedback').textContent='Procure o próximo número.'}};row.appendChild(b)});}
-function doubleAnimal(a){const animals=['🐶','🐱','🐰','🐸','🐥','🦊']; let target=animals[Math.floor(Math.random()*animals.length)], ok=0, tries=0; a.innerHTML=`<div class="center big">Clique duplo em: <span id="animalT" style="font-size:60px">${target}</span></div><div class="click-area"></div>`; const area=a.querySelector('.click-area'); shuffle([...animals]).forEach(an=>{const d=document.createElement('div');d.className='shape';d.style.background='#fff';d.textContent=an;d.ondblclick=()=>{tries++; if(an===target){ok++;d.classList.add('ok'); if(ok>=3) complete('doubleAnimal','Clique duplo','Realizar dois cliques rápidos no mesmo alvo.', Math.max(1,5-(tries-ok)),5); else {target=animals[Math.floor(Math.random()*animals.length)];document.getElementById('animalT').textContent=target;}}else{d.classList.add('no'); setTimeout(()=>d.classList.remove('no'),300)}}; area.appendChild(d)});}
-function trail(a){let next=1, errors=0; a.innerHTML='<div class="center"><span class="mini-goal">Siga o caminho: 1 até 6</span></div><div class="trail-board"></div>'; const board=a.querySelector('.trail-board'); const pts=[[7,12],[25,62],[42,22],[57,68],[73,30],[85,72]]; pts.forEach((p,i)=>{const d=document.createElement('div');d.className='trail-dot';d.textContent=i+1;d.style.left=p[0]+'%';d.style.top=p[1]+'%';d.onclick=()=>{if(i+1===next){d.classList.add('done');next++; if(next===7)complete('trail','Precisão e sequência do mouse','Mover o ponteiro e clicar em alvos numerados em sequência.',6-errors,6)}else{errors++;d.classList.add('no');setTimeout(()=>d.classList.remove('no'),300);document.getElementById('feedback').textContent='Siga a ordem dos números.'}};board.appendChild(d)});}
-function dragColor(a){let done=0, tries=0; a.innerHTML='<div class="row"><div id="items" class="row"></div></div><div class="row" style="margin-top:18px"><div class="target-box" data-color="blue">CASA AZUL 💙</div><div class="target-box" data-color="green">CASA VERDE 💚</div><div class="target-box" data-color="orange">CASA LARANJA 🧡</div><div class="target-box" data-color="pink">CASA ROSA 💗</div></div>'; const items=shuffle([['blue','🔵'],['green','🟢'],['orange','🟠'],['pink','🌸']]); const holder=a.querySelector('#items'); items.forEach((it,i)=>{const el=document.createElement('div');el.className='drag-item '+it[0];el.textContent=it[1];el.draggable=true;el.dataset.color=it[0];el.id='dragC'+i; el.ondragstart=e=>e.dataTransfer.setData('text/plain',el.id); holder.appendChild(el)}); a.querySelectorAll('.target-box').forEach(box=>{box.ondragover=e=>{e.preventDefault();box.classList.add('hover')};box.ondragleave=()=>box.classList.remove('hover');box.ondrop=e=>{e.preventDefault();box.classList.remove('hover');tries++; const id=e.dataTransfer.getData('text/plain'); const el=document.getElementById(id); if(el && el.dataset.color===box.dataset.color){box.appendChild(el);el.draggable=false;done++; if(done===4) complete('dragColor','Arrastar e soltar por cor','Arrastar objetos até o destino correspondente pela cor.', Math.max(1,6-(tries-done)),6)} else {document.getElementById('feedback').textContent='Tente colocar na casa da mesma cor.'}}});}
-function dragCount(a){let done=0, tries=0; a.innerHTML='<div class="row"><div id="countItems" class="row"></div></div><div class="row" style="margin-top:18px"><div class="target-box" data-count="1">NÚMERO 1</div><div class="target-box" data-count="2">NÚMERO 2</div><div class="target-box" data-count="3">NÚMERO 3</div></div>'; const items=shuffle([['1','🍎'],['2','🍎🍎'],['3','🍎🍎🍎']]); const holder=a.querySelector('#countItems'); items.forEach((it,i)=>{const el=document.createElement('div');el.className='drag-item yellow';el.style.width='145px';el.textContent=it[1];el.draggable=true;el.dataset.count=it[0];el.id='dragN'+i; el.ondragstart=e=>e.dataTransfer.setData('text/plain',el.id); holder.appendChild(el)}); a.querySelectorAll('.target-box').forEach(box=>{box.ondragover=e=>{e.preventDefault();box.classList.add('hover')};box.ondragleave=()=>box.classList.remove('hover');box.ondrop=e=>{e.preventDefault();box.classList.remove('hover');tries++; const id=e.dataTransfer.getData('text/plain'); const el=document.getElementById(id); if(el && el.dataset.count===box.dataset.count){box.appendChild(el);el.draggable=false;done++; if(done===3) complete('dragCount','Arrastar por quantidade','Relacionar quantidade visual ao numeral correspondente.', Math.max(1,5-(tries-done)),5)} else {document.getElementById('feedback').textContent='Conte as maçãs e tente novamente.'}}});}
-function selectName(a){a.innerHTML=`<div class="name-help">Professor(a): peça ao aluno para arrastar o mouse sobre o primeiro nome colorido abaixo, como se fosse pintar o nome. Depois, clique em <strong>Conferi</strong>.</div><div class="center"><span class="select-name" style="color:${selected.color}">${selected.first}</span></div><div class="center"><button id="checkSelect" class="success">Conferi</button></div>`; document.getElementById('checkSelect').onclick=()=>complete('selectName','Selecionar texto','Reconhecer e selecionar o primeiro nome em caixa alta.',4,4);}
-function selectLetters(a){let ok=0; const target='A'; a.innerHTML=`<div class="name-help">Selecione com o mouse as letras <strong>${target}</strong>. Depois clique em Conferi.</div><div class="center" id="letters"></div><div class="center"><button id="checkLetters" class="success">Conferi</button></div>`; const letters=a.querySelector('#letters'); ['A','B','A','C','A','D'].forEach((l,i)=>{const s=document.createElement('span');s.className='select-card';s.textContent=l;s.style.color=['#ef4444','#3b82f6','#22c55e','#a855f7','#f97316','#06b6d4'][i];s.onclick=()=>{s.classList.toggle('painted')};letters.appendChild(s)}); document.getElementById('checkLetters').onclick=()=>{ok=0; document.querySelectorAll('.select-card').forEach(s=>{if(s.textContent===target && s.classList.contains('painted'))ok++; if(s.textContent!==target && s.classList.contains('painted'))ok--});complete('selectLetters','Selecionar letras iguais','Identificar e selecionar letras iguais em caixa alta.',ok,3)};}
-function makeTypeActivity(a, seq, skill, objective, key, caseHint){let idx=0, ok=0, tries=0; a.innerHTML=`<div class="center"><div id="target" class="keyboard-target"></div><p>${caseHint}</p><input id="inp" class="typing-box" maxlength="1" autofocus></div>`; const target=a.querySelector('#target'), inp=a.querySelector('#inp'); function show(){target.textContent=seq[idx];inp.value='';setTimeout(()=>inp.focus(),80)} inp.oninput=()=>{tries++; if(inp.value===seq[idx]){ok++; idx++; if(idx>=seq.length)complete(key,skill,objective,Math.max(1,ok-(tries-ok)*0.5),seq.length); else show()} else {document.getElementById('feedback').textContent='Observe com calma e tente de novo.'; setTimeout(()=>{inp.value='';inp.focus()},500)}}; show();}
-function typeUpper(a){makeTypeActivity(a,['A','B','C','D','E'],'Digitar letras maiúsculas','Identificar e digitar letras em caixa alta.','typeUpper','Digite a letra MAIÚSCULA que aparece.');}
-function typeLower(a){makeTypeActivity(a,['a','b','c','d','e'],'Digitar letras minúsculas','Identificar e digitar letras em caixa baixa.','typeLower','Digite a letra minúscula que aparece.');}
-function typeNumber(a){makeTypeActivity(a,['1','4','2','5','3'],'Digitar números','Reconhecer e digitar numerais de 1 a 5.','typeNumber','Digite o número que aparece.');}
-function typeMix(a){const targets=['A1','b2','C3'];let idx=0, score=0; a.innerHTML='<div class="center"><div id="mixTarget" class="keyboard-target"></div><p>Copie igualzinho.</p><input id="mixInp" class="typing-box" maxlength="2" style="width:230px" autofocus><p class="muted">Observe: letra grande, letra pequena e número.</p></div>'; const target=a.querySelector('#mixTarget'), inp=a.querySelector('#mixInp'); function show(){target.textContent=targets[idx];inp.value='';setTimeout(()=>inp.focus(),80)} inp.oninput=()=>{if(inp.value.length===targets[idx].length){for(let i=0;i<targets[idx].length;i++) if(inp.value[i]===targets[idx][i]) score++; idx++; if(idx>=targets.length)complete('typeMix','Sequência curta com letras e números','Copiar sequência curta com letra maiúscula, minúscula e número.',score,6); else show()}}; show();}
-function showReport(){document.getElementById('game').classList.add('hidden');document.getElementById('final').classList.remove('hidden'); const valid=results.filter(Boolean); const total=valid.reduce((s,r)=>s+r.percent,0); const avg=Math.round(total/valid.length); document.getElementById('rAluno').textContent=selected.full; document.getElementById('rData').textContent=new Date().toLocaleDateString('pt-BR'); document.getElementById('rGeral').textContent=avg+'% de aproveitamento nas habilidades propostas'; document.getElementById('rNivel').textContent=level(avg); let obs='O(a) aluno(a) realizou uma sequência lúdica ampliada de coordenação motora fina, atenção visual, reconhecimento de cores/números/letras e iniciação ao teclado.'; if(avg<45) obs+=' Necessita de apoio individual frequente para uso do mouse, seleção e localização das teclas.'; else if(avg<70) obs+=' Está em processo de desenvolvimento, realizando parte dos comandos com mediação do professor.'; else if(avg<90) obs+=' Demonstra boa autonomia para os comandos básicos, necessitando apenas de pequenos lembretes.'; else obs+=' Demonstra autonomia, precisão e atenção na execução dos comandos básicos.'; document.getElementById('rObs').textContent=obs; const tbody=document.querySelector('#rTabela tbody'); tbody.innerHTML=''; valid.forEach(r=>{const tr=document.createElement('tr');tr.innerHTML=`<td>${r.skill}</td><td>${r.objective}</td><td>${r.percent}%</td><td>${r.level}</td>`;tbody.appendChild(tr)});}
-init();
-</script>
+    <div class="layout">
+      <nav aria-label="Etapas da aula">
+        <button class="navBtn active" data-screen="0">1. Nomes<small>6 min</small></button>
+        <button class="navBtn" data-screen="1">2. Dedos<small>5 min</small></button>
+        <button class="navBtn" data-screen="2">3. Letras<small>8 min</small></button>
+        <button class="navBtn" data-screen="3">4. Meu nome<small>8 min</small></button>
+        <button class="navBtn" data-screen="4">5. Palavras<small>6 min</small></button>
+        <button class="navBtn" data-screen="5">6. Espaço<small>4 min</small></button>
+        <button class="navBtn" data-screen="6">7. Final<small>3 min</small></button>
+      </nav>
+
+      <section class="stage">
+        <article class="screen active">
+          <div class="screenHead">
+            <div>
+              <h2>Procure seu primeiro nome</h2>
+              <p class="hint">A criança olha os cartões e digita a primeira letra do próprio nome.</p>
+            </div>
+            <div class="badge">6 min</div>
+          </div>
+
+          <div>
+            <div class="panel playPanel">
+              <div class="welcome">
+                <div>
+                  <div class="welcomeTitle">Jardim III</div>
+                  <div class="welcomeText">Colégio Universitas · escolha seu nome para começar</div>
+                </div>
+                <div class="rainbow" aria-hidden="true"></div>
+              </div>
+              <div class="mascot">
+                <div class="mascotFace"><span class="smile"></span></div>
+                <div>Procure seu primeiro nome. Depois, uma janela vai abrir para você copiar no teclado.</div>
+              </div>
+              <div class="nameCloud" id="nameCloud"></div>
+            </div>
+          </div>
+
+          <div class="footerNav">
+            <button class="action secondary" data-prev>Anterior</button>
+            <button class="action" data-next>Ir para atividades</button>
+          </div>
+        </article>
+
+        <article class="screen">
+          <div class="screenHead">
+            <div>
+              <h2>Dedos na linha da casa</h2>
+              <p class="hint">O professor chama uma letra e a criança aperta a tecla correspondente.</p>
+            </div>
+            <div class="badge">5 min</div>
+          </div>
+
+          <div class="twoCol">
+            <div class="panel">
+              <h2>Teclado</h2>
+              <div class="homeRow" id="homeRow"></div>
+              <div class="spaceKey" id="spaceKey">ESPAÇO - dedão</div>
+              <div class="note" id="homeMsg">Digite uma tecla da linha A S D F G H J K L Ç.</div>
+            </div>
+            <div class="panel">
+              <svg class="hand" viewBox="0 0 640 330" role="img" aria-label="desenho das mãos no teclado">
+                <rect x="0" y="0" width="640" height="330" fill="#ffffff"></rect>
+                <text x="150" y="34" text-anchor="middle" font-size="22" font-weight="800" fill="#5d6a78">mão esquerda</text>
+                <text x="490" y="34" text-anchor="middle" font-size="22" font-weight="800" fill="#5d6a78">mão direita</text>
+                <g stroke="#203040" stroke-width="3">
+                  <rect class="svgFinger finger-a" x="34" y="124" width="42" height="116" rx="20" fill="#fff0f5"></rect>
+                  <rect class="svgFinger finger-s" x="84" y="86" width="44" height="154" rx="22" fill="#eef6ff"></rect>
+                  <rect class="svgFinger finger-d" x="138" y="64" width="46" height="176" rx="23" fill="#eefdf1"></rect>
+                  <rect class="svgFinger finger-f" x="194" y="82" width="46" height="158" rx="23" fill="#fff8df"></rect>
+                  <rect class="svgFinger finger-g" x="248" y="108" width="46" height="132" rx="23" fill="#fff8df"></rect>
+                  <path class="svgFinger finger-space-left" d="M132 246 C172 226, 236 232, 270 274 C230 298, 170 302, 128 278 Z" fill="#fff0e4"></path>
+                  <path d="M74 220 C112 248, 214 252, 266 224 L286 306 L78 306 Z" fill="#f7d7be"></path>
+                  <rect class="svgFinger finger-h" x="346" y="108" width="46" height="132" rx="23" fill="#fff8df"></rect>
+                  <rect class="svgFinger finger-j" x="400" y="82" width="46" height="158" rx="23" fill="#fff8df"></rect>
+                  <rect class="svgFinger finger-k" x="456" y="64" width="46" height="176" rx="23" fill="#eefdf1"></rect>
+                  <rect class="svgFinger finger-l" x="512" y="86" width="44" height="154" rx="22" fill="#eef6ff"></rect>
+                  <rect class="svgFinger finger-ç" x="564" y="124" width="42" height="116" rx="20" fill="#fff0f5"></rect>
+                  <path class="svgFinger finger-space-right" d="M370 274 C404 232, 468 226, 508 246 L512 278 C470 302, 410 298, 370 274 Z" fill="#fff0e4"></path>
+                  <path d="M354 224 C406 252, 508 248, 546 220 L542 306 L334 306 Z" fill="#f7d7be"></path>
+                </g>
+              </svg>
+              <div class="fingerLabel" id="fingerLabel">Digite uma letra para iluminar o dedo.</div>
+            </div>
+          </div>
+
+          <div class="footerNav">
+            <button class="action secondary" data-prev>Anterior</button>
+            <button class="action" data-next>Próxima</button>
+          </div>
+        </article>
+
+        <article class="screen">
+          <div class="screenHead">
+            <div>
+              <h2>Encontre a letra</h2>
+              <p class="hint">A tela mostra uma letra da linha da casa. O aluno aperta a tecla correta.</p>
+            </div>
+            <div class="badge">8 min</div>
+          </div>
+
+          <div class="practiceGrid">
+            <div class="panel playPanel">
+              <div class="mascot">
+                <div class="mascotFace"><span class="smile"></span></div>
+                <div>Olhe o desenho, diga a letra inicial e aperte a tecla correta.</div>
+              </div>
+              <div class="pictureCard">
+                <div id="letterPicture"></div>
+                <div>
+                  <div class="wordBig" id="letterWord">AVIAO</div>
+                  <div class="mini" id="letterHint">A de avião.</div>
+                </div>
+              </div>
+              <div class="bigPrompt" id="letterPrompt">A</div>
+              <input class="typeInput" id="letterInput" maxlength="1" autocomplete="off" aria-label="Digite a letra mostrada">
+              <div class="note" id="letterMsg">Digite a inicial do desenho.</div>
+            </div>
+            <div class="panel">
+              <h2>Ajuda dos dedos</h2>
+              <div class="handCopy" id="letterHand"></div>
+              <div class="homeRow" id="letterKeys"></div>
+              <div class="note" id="letterFinger">A fica com o mindinho esquerdo.</div>
+            </div>
+          </div>
+
+          <div class="footerNav">
+            <button class="action secondary" data-prev>Anterior</button>
+            <button class="action" data-next>Próxima</button>
+          </div>
+        </article>
+
+        <article class="screen">
+          <div class="screenHead">
+            <div>
+              <h2>Copie o primeiro nome</h2>
+              <p class="hint">A criança identifica seu cartão e copia apenas o primeiro nome.</p>
+            </div>
+            <div class="badge">8 min</div>
+          </div>
+
+          <div class="practiceGrid">
+            <div class="panel">
+              <h2>Nome da vez</h2>
+              <div class="bigPrompt" id="namePrompt">DERICK</div>
+              <input class="typeInput" id="nameInput" maxlength="14" autocomplete="off" aria-label="Copie o primeiro nome">
+              <div class="note" id="nameMsg">Copie o nome que aparece.</div>
+              <div class="handCopy" id="nameHand"></div>
+            </div>
+            <div class="panel playPanel">
+              <div class="mascot">
+                <div class="mascotFace"><span class="smile"></span></div>
+                <div>Pressione Enter para trocar o nome da vez.</div>
+              </div>
+              <div class="nameCloud" id="copyNameCloud"></div>
+            </div>
+          </div>
+
+          <div class="footerNav">
+            <button class="action secondary" data-prev>Anterior</button>
+            <button class="action" data-next>Próxima</button>
+          </div>
+        </article>
+
+        <article class="screen">
+          <div class="screenHead">
+            <div>
+              <h2>Copie palavras com desenhos</h2>
+              <p class="hint">Esta fase mantém as palavras conhecidas como reforço visual.</p>
+            </div>
+            <div class="badge">6 min</div>
+          </div>
+
+          <div class="practiceGrid">
+            <div class="panel playPanel">
+              <div class="wordGrid" id="wordGrid"></div>
+            </div>
+            <div class="panel">
+              <h2>Palavra da vez</h2>
+              <div class="pictureCard">
+                <div id="wordPicture"></div>
+                <div>
+                  <div class="wordBig" id="wordName">SOL</div>
+                  <div class="mini" id="wordHint">Copie a palavra.</div>
+                </div>
+              </div>
+              <input class="typeInput" id="wordInput" maxlength="12" autocomplete="off" aria-label="Copie a palavra">
+              <div class="note" id="wordMsg">Copie a palavra que aparece.</div>
+              <div class="handCopy" id="wordHand"></div>
+            </div>
+          </div>
+
+          <div class="footerNav">
+            <button class="action secondary" data-prev>Anterior</button>
+            <button class="action" data-next>Próxima</button>
+          </div>
+        </article>
+
+        <article class="screen">
+          <div class="screenHead">
+            <div>
+              <h2>Dedão no espaço</h2>
+              <p class="hint">A criança digita um nome, espaço com o dedão e outro nome.</p>
+            </div>
+            <div class="badge">4 min</div>
+          </div>
+
+          <div class="practiceGrid">
+            <div class="panel">
+              <h2>Copie com espaço</h2>
+              <div class="bigPrompt" id="spacePrompt">ANA LIA</div>
+              <input class="typeInput" id="spaceInput" maxlength="24" autocomplete="off" aria-label="Copie com espaço">
+              <div class="note" id="spaceMsg">Use o dedão para o espaço entre os nomes.</div>
+            </div>
+            <div class="panel">
+              <h2>Teclado</h2>
+              <div class="handCopy" id="spaceHand"></div>
+              <div class="homeRow" id="spaceKeys"></div>
+              <div class="spaceKey active">ESPAÇO - dedão</div>
+              <div class="note">Os dedões descansam perto da barra de espaço.</div>
+            </div>
+          </div>
+
+          <div class="footerNav">
+            <button class="action secondary" data-prev>Anterior</button>
+            <button class="action" data-next>Próxima</button>
+          </div>
+        </article>
+
+        <article class="screen">
+          <div class="screenHead">
+            <div>
+              <h2>Missão cumprida</h2>
+              <p class="hint">Para encerrar, cada criança digita a inicial do próprio nome mais uma vez.</p>
+            </div>
+            <div class="badge">3 min</div>
+          </div>
+
+          <div class="twoCol">
+            <div class="panel playPanel">
+              <div class="mascot">
+                <div class="mascotFace"><span class="smile"></span></div>
+                <div>Parabéns! A turma usou o teclado para reconhecer nomes, letras e palavras.</div>
+              </div>
+              <div class="nameCloud" id="finalCloud"></div>
+            </div>
+            <div class="panel">
+              <h2>Rodada final</h2>
+              <div id="finalPicture"></div>
+              <div class="bigPrompt" id="finalPrompt">?</div>
+              <input class="typeInput" id="finalInput" maxlength="1" autocomplete="off" aria-label="Digite sua inicial">
+              <div class="note" id="finalMsg">Digite a inicial da imagem.</div>
+              <div class="handCopy" id="finalHand"></div>
+            </div>
+          </div>
+
+          <div class="btnRow">
+            <button class="action" id="restartAll">Voltar ao início</button>
+          </div>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <div class="modalBackdrop" id="nameModal" aria-hidden="true">
+    <div class="nameModal" role="dialog" aria-modal="true" aria-labelledby="modalStudentName">
+      <div class="mascot">
+        <div class="mascotFace"><span class="smile"></span></div>
+        <div>Copie seu nome usando o teclado.</div>
+      </div>
+      <div class="modalName" id="modalStudentName">DERICK</div>
+      <input class="modalInput" id="modalNameInput" maxlength="20" autocomplete="off" aria-label="Copie seu primeiro nome">
+      <div class="note" id="modalNameMsg">Escreva o nome que aparece em cima.</div>
+      <div class="handCopy" id="modalHand"></div>
+      <div class="btnRow">
+        <button class="action secondary" id="modalClose">Escolher outro nome</button>
+        <button class="action" id="modalStart" disabled>Começar atividades</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const screens = Array.from(document.querySelectorAll('.screen'));
+    const navButtons = Array.from(document.querySelectorAll('.navBtn'));
+    const progressBar = document.getElementById('progressBar');
+    const scoreLabel = document.getElementById('scoreLabel');
+    let screenIndex = 0;
+    let stars = 0;
+    let currentInitial = null;
+    let currentLetter = null;
+    let currentName = null;
+    let currentWord = null;
+    let currentSpace = null;
+    let finalInitial = null;
+    let selectedStudent = null;
+
+    const students = ['DERICK', 'HELENA', 'ISADORA', 'JOAQUIM', 'MARIA CLARA', 'MARIA HELENA', 'PEDRO'];
+
+    const keys = [
+      { letter: 'A', finger: 'mindinho esquerdo', color: '#e7549a' },
+      { letter: 'S', finger: 'anelar esquerdo', color: '#2f80ed' },
+      { letter: 'D', finger: 'médio esquerdo', color: '#23a455' },
+      { letter: 'F', finger: 'indicador esquerdo', color: '#f2bd22' },
+      { letter: 'G', finger: 'indicador esquerdo', color: '#f27b35' },
+      { letter: 'H', finger: 'indicador direito', color: '#f27b35' },
+      { letter: 'J', finger: 'indicador direito', color: '#f2bd22' },
+      { letter: 'K', finger: 'médio direito', color: '#23a455' },
+      { letter: 'L', finger: 'anelar direito', color: '#2f80ed' },
+      { letter: 'Ç', finger: 'mindinho direito', color: '#e7549a' }
+    ];
+
+    const words = [
+      { name: 'AVIAO', image: 'plane', spoken: 'avião' },
+      { name: 'SOL', image: 'sun', spoken: 'sol' },
+      { name: 'DADO', image: 'dice', spoken: 'dado' },
+      { name: 'FLOR', image: 'flower', spoken: 'flor' },
+      { name: 'GATO', image: 'cat', spoken: 'gato' },
+      { name: 'LUA', image: 'moon', spoken: 'lua' },
+      { name: 'KIWI', image: 'kiwi', spoken: 'kiwi' },
+      { name: 'MACA', image: 'apple', spoken: 'maçã' }
+    ];
+
+    const imagePrompts = [
+      { letter: 'A', name: 'AVIAO', image: 'plane', spoken: 'avião' },
+      { letter: 'A', name: 'ANEL', image: 'ring', spoken: 'anel' },
+      { letter: 'S', name: 'SOL', image: 'sun', spoken: 'sol' },
+      { letter: 'S', name: 'SAPO', image: 'frog', spoken: 'sapo' },
+      { letter: 'D', name: 'DADO', image: 'dice', spoken: 'dado' },
+      { letter: 'D', name: 'DOCE', image: 'candy', spoken: 'doce' },
+      { letter: 'F', name: 'FLOR', image: 'flower', spoken: 'flor' },
+      { letter: 'F', name: 'FOGO', image: 'fire', spoken: 'fogo' },
+      { letter: 'G', name: 'GATO', image: 'cat', spoken: 'gato' },
+      { letter: 'G', name: 'GOTA', image: 'drop', spoken: 'gota' },
+      { letter: 'H', name: 'HELI', image: 'helicopter', spoken: 'helicóptero' },
+      { letter: 'J', name: 'JACARE', image: 'alligator', spoken: 'jacaré' },
+      { letter: 'K', name: 'KIWI', image: 'kiwi', spoken: 'kiwi' },
+      { letter: 'L', name: 'LUA', image: 'moon', spoken: 'lua' },
+      { letter: 'L', name: 'LAPIS', image: 'pencil', spoken: 'lápis' },
+      { letter: 'Ç', name: 'MACA', image: 'apple', spoken: 'maçã' }
+    ];
+
+    function normalizeText(text) {
+      return text.toUpperCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/Ç/g, 'C').replace(/[^A-Z ]/g, '').replace(/\s+/g, ' ').trim();
+    }
+
+    function addStar(amount = 1) {
+      stars += amount;
+      scoreLabel.textContent = stars === 1 ? '1 estrela' : `${stars} estrelas`;
+    }
+
+    function showScreen(index) {
+      screenIndex = Math.max(0, Math.min(index, screens.length - 1));
+      screens.forEach((screen, i) => screen.classList.toggle('active', i === screenIndex));
+      navButtons.forEach((btn, i) => btn.classList.toggle('active', i === screenIndex));
+      progressBar.style.width = `${(screenIndex / (screens.length - 1)) * 100}%`;
+      const focusIds = [null, null, 'letterInput', 'nameInput', 'wordInput', 'spaceInput', 'finalInput'];
+      const id = focusIds[screenIndex];
+      if (id) setTimeout(() => document.getElementById(id).focus(), 50);
+    }
+
+    navButtons.forEach((btn, index) => btn.addEventListener('click', () => showScreen(index)));
+    document.querySelectorAll('[data-next]').forEach(btn => btn.addEventListener('click', () => showScreen(screenIndex + 1)));
+    document.querySelectorAll('[data-prev]').forEach(btn => btn.addEventListener('click', () => showScreen(screenIndex - 1)));
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Enter') {
+        if (screenIndex === 2) newLetter();
+        else if (screenIndex === 3) newName();
+        else if (screenIndex === 4) newWord();
+        else if (screenIndex === 5) newSpace();
+        else if (screenIndex === 6) newFinal();
+      }
+      if (event.altKey && event.key === 'ArrowRight') showScreen(screenIndex + 1);
+      if (event.altKey && event.key === 'ArrowLeft') showScreen(screenIndex - 1);
+    });
+
+    function avatar(name) {
+      const initials = name.split(' ').map(part => part[0]).slice(0, 2).join('');
+      const colors = ['#2f80ed', '#23a455', '#f2bd22', '#e64b4b', '#8f5bff', '#f27b35', '#e7549a'];
+      const color = colors[name.length % colors.length];
+      return `<span class="avatar" style="background:${color}">${initials}</span>`;
+    }
+
+    function renderNameCloud(containerId, selectable = false) {
+      const box = document.getElementById(containerId);
+      box.innerHTML = '';
+      students.forEach(name => {
+        const card = document.createElement(selectable ? 'button' : 'div');
+        card.className = 'nameCard';
+        if (name.length > 9) card.classList.add('wideName');
+        card.dataset.name = name;
+        card.innerHTML = `${avatar(name)}<span class="nameText ${name.length > 9 ? 'longName' : ''}">${name}</span>`;
+        if (selectable) {
+          card.type = 'button';
+          card.addEventListener('click', () => openNameModal(name));
+        }
+        box.appendChild(card);
+      });
+    }
+
+    function markName(name) {
+      document.querySelectorAll('.nameCard').forEach(card => card.classList.toggle('active', card.dataset.name === name));
+    }
+
+    function randomFrom(list) {
+      return list[Math.floor(Math.random() * list.length)];
+    }
+
+    function openNameModal(name) {
+      selectedStudent = name;
+      markName(name);
+      document.getElementById('modalStudentName').textContent = name;
+      document.getElementById('modalNameInput').value = '';
+      document.getElementById('modalNameMsg').textContent = 'Escreva o nome que aparece em cima.';
+      document.getElementById('modalStart').disabled = true;
+      document.getElementById('nameModal').classList.add('open');
+      document.getElementById('nameModal').setAttribute('aria-hidden', 'false');
+      setTimeout(() => document.getElementById('modalNameInput').focus(), 60);
+    }
+
+    function closeNameModal() {
+      document.getElementById('nameModal').classList.remove('open');
+      document.getElementById('nameModal').setAttribute('aria-hidden', 'true');
+    }
+
+    function checkModalName() {
+      const value = normalizeText(document.getElementById('modalNameInput').value);
+      if (value === selectedStudent) {
+        document.getElementById('modalNameMsg').textContent = 'Muito bem! Agora pode começar as atividades.';
+        document.getElementById('modalStart').disabled = false;
+        addStar(2);
+      } else if (value.length >= selectedStudent.length) {
+        document.getElementById('modalNameMsg').textContent = 'Compare com o nome de cima e tente ajustar.';
+      } else if (value) {
+        const last = value.slice(-1);
+        if (keys.some(item => item.letter === last)) highlightFinger(last);
+      }
+    }
+
+    function renderKeys(containerId) {
+      const box = document.getElementById(containerId);
+      box.innerHTML = '';
+      keys.forEach(item => {
+        const key = document.createElement('div');
+        key.className = 'key';
+        key.dataset.letter = item.letter;
+        key.innerHTML = `${item.letter}<span>${item.finger.split(' ')[0]}</span>`;
+        box.appendChild(key);
+      });
+    }
+
+    function copyHandsToPanels() {
+      const source = document.querySelector('svg.hand');
+      if (!source) return;
+      ['modalHand', 'letterHand', 'nameHand', 'wordHand', 'spaceHand', 'finalHand'].forEach(id => {
+        const slot = document.getElementById(id);
+        if (slot) slot.innerHTML = source.outerHTML;
+      });
+    }
+
+    function clearHighlights() {
+      document.querySelectorAll('.key').forEach(item => item.classList.remove('active'));
+      document.querySelectorAll('.svgFinger').forEach(el => {
+        el.style.stroke = '#203040';
+        el.style.strokeWidth = '3';
+        el.style.filter = '';
+      });
+      document.querySelectorAll('.spaceKey').forEach(item => item.classList.remove('active'));
+    }
+
+    function highlightFinger(letter) {
+      clearHighlights();
+      if (letter === ' ') {
+        document.querySelectorAll('.finger-space-left, .finger-space-right').forEach(el => {
+          el.style.stroke = '#2f80ed';
+          el.style.strokeWidth = '8';
+          el.style.filter = 'drop-shadow(0 0 8px rgba(47,128,237,.55))';
+        });
+        document.querySelectorAll('.spaceKey').forEach(item => item.classList.add('active'));
+        document.getElementById('fingerLabel').textContent = 'ESPAÇO: use o dedão.';
+        return;
+      }
+      const info = keys.find(item => item.letter === letter || (letter === 'C' && item.letter === 'Ç'));
+      if (!info) return;
+      document.querySelectorAll(`.key[data-letter="${info.letter}"]`).forEach(item => item.classList.add('active'));
+      document.querySelectorAll(`.finger-${info.letter.toLowerCase()}`).forEach(el => {
+        el.style.stroke = '#2f80ed';
+        el.style.strokeWidth = '8';
+        el.style.filter = 'drop-shadow(0 0 8px rgba(47,128,237,.55))';
+      });
+      document.getElementById('fingerLabel').textContent = `${letter}: use o ${info.finger}.`;
+    }
+
+    document.addEventListener('keydown', event => {
+      const letter = event.key.toUpperCase();
+      if (keys.some(item => item.letter === letter)) {
+        highlightFinger(letter);
+        if (screenIndex === 1) {
+          const info = keys.find(item => item.letter === letter);
+          document.getElementById('homeMsg').textContent = `${letter}: use o ${info.finger}.`;
+        }
+      }
+      if (event.key === ' ') highlightFinger(' ');
+    });
+
+    function newLetter() {
+      currentLetter = randomFrom(imagePrompts);
+      document.getElementById('letterPicture').innerHTML = pictureSvg(currentLetter.image);
+      document.getElementById('letterWord').textContent = currentLetter.name;
+      document.getElementById('letterHint').textContent = `Inicial de ${currentLetter.spoken}.`;
+      document.getElementById('letterPrompt').textContent = currentLetter.letter;
+      document.getElementById('letterInput').value = '';
+      document.getElementById('letterMsg').textContent = `Digite ${currentLetter.letter}, inicial de ${currentLetter.name}.`;
+      const info = keys.find(item => item.letter === currentLetter.letter || (currentLetter.letter === 'Ç' && item.letter === 'Ç'));
+      document.getElementById('letterFinger').textContent = info ? `${currentLetter.letter}: use o ${info.finger}.` : 'Digite a inicial.';
+      highlightFinger(currentLetter.letter);
+      document.getElementById('letterInput').focus();
+    }
+
+    function checkLetter() {
+      const value = normalizeText(document.getElementById('letterInput').value);
+      if (value === currentLetter.letter || (currentLetter.letter === 'Ç' && value === 'C')) {
+        document.getElementById('letterMsg').textContent = 'Certo! Próxima imagem.';
+        addStar();
+        setTimeout(newLetter, 750);
+      } else if (value) {
+        document.getElementById('letterMsg').textContent = 'Compare com a letra grande.';
+      }
+    }
+
+    function newName() {
+      currentName = randomFrom(students);
+      document.getElementById('namePrompt').textContent = currentName;
+      document.getElementById('nameInput').value = '';
+      document.getElementById('nameMsg').textContent = `Copie: ${currentName}`;
+      markName(currentName);
+      highlightFinger(currentName[0]);
+      document.getElementById('nameInput').focus();
+    }
+
+    function checkName() {
+      const value = normalizeText(document.getElementById('nameInput').value);
+      if (value === currentName) {
+        document.getElementById('nameMsg').textContent = 'Nome copiado certinho!';
+        addStar(2);
+        setTimeout(newName, 900);
+      } else if (value.length >= currentName.length) {
+        document.getElementById('nameMsg').textContent = 'Compare letra por letra com o nome.';
+      } else if (value) {
+        const last = value.slice(-1);
+        if (keys.some(item => item.letter === last)) highlightFinger(last);
+      }
+    }
+
+    function pictureSvg(kind) {
+      const common = 'width="132" height="132" viewBox="0 0 132 132" class="picSvg" role="img"';
+      const svgs = {
+        plane: `<svg ${common} aria-label="avião"><rect width="132" height="132" fill="#eaf6ff"/><path d="M17 72 L112 36 L77 84 L88 116 L58 91 L34 102 L47 80 Z" fill="#2f80ed"/><path d="M47 80 L17 72 L54 64 Z" fill="#8f5bff"/></svg>`,
+        sun: `<svg ${common} aria-label="sol"><rect width="132" height="132" fill="#fff8df"/><circle cx="66" cy="66" r="30" fill="#f2bd22"/><g stroke="#f27b35" stroke-width="6" stroke-linecap="round"><path d="M66 12v18M66 102v18M12 66h18M102 66h18M28 28l13 13M91 91l13 13M104 28L91 41M41 91l-13 13"/></g></svg>`,
+        dice: `<svg ${common} aria-label="dado"><rect width="132" height="132" fill="#eefdf1"/><rect x="31" y="31" width="70" height="70" rx="12" fill="#fff" stroke="#23a455" stroke-width="6"/><circle cx="50" cy="50" r="7" fill="#203040"/><circle cx="82" cy="50" r="7" fill="#203040"/><circle cx="66" cy="66" r="7" fill="#203040"/><circle cx="50" cy="82" r="7" fill="#203040"/><circle cx="82" cy="82" r="7" fill="#203040"/></svg>`,
+        flower: `<svg ${common} aria-label="flor"><rect width="132" height="132" fill="#fff8df"/><path d="M66 78 C58 94, 52 105, 42 116" stroke="#23a455" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="66" cy="52" r="13" fill="#f2bd22"/><g fill="#e7549a"><circle cx="66" cy="27" r="18"/><circle cx="66" cy="77" r="18"/><circle cx="41" cy="52" r="18"/><circle cx="91" cy="52" r="18"/></g><circle cx="66" cy="52" r="13" fill="#f2bd22"/></svg>`,
+        cat: `<svg ${common} aria-label="gato"><rect width="132" height="132" fill="#fff0e4"/><path d="M36 48 L45 24 L62 43 L80 43 L97 24 L96 48 C106 62 104 90 86 101 C72 109 50 106 39 94 C27 81 27 61 36 48 Z" fill="#f27b35"/><circle cx="52" cy="66" r="5" fill="#203040"/><circle cx="80" cy="66" r="5" fill="#203040"/><path d="M62 78 Q66 83 70 78" stroke="#203040" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`,
+        moon: `<svg ${common} aria-label="lua"><rect width="132" height="132" fill="#eaf6ff"/><path d="M84 21 C58 29 41 52 44 77 C47 101 69 114 96 108 C82 118 61 120 43 108 C18 92 10 58 27 34 C40 16 63 10 84 21 Z" fill="#f2bd22"/><circle cx="93" cy="37" r="5" fill="#2f80ed"/><circle cx="107" cy="54" r="4" fill="#2f80ed"/><circle cx="99" cy="78" r="4" fill="#2f80ed"/></svg>`,
+        kiwi: `<svg ${common} aria-label="kiwi"><rect width="132" height="132" fill="#eefdf1"/><circle cx="66" cy="66" r="42" fill="#8a5a35"/><circle cx="66" cy="66" r="32" fill="#8bd450"/><circle cx="66" cy="66" r="12" fill="#f7fff2"/><g fill="#203040"><circle cx="66" cy="35" r="3"/><circle cx="84" cy="42" r="3"/><circle cx="96" cy="60" r="3"/><circle cx="90" cy="82" r="3"/><circle cx="66" cy="97" r="3"/><circle cx="42" cy="82" r="3"/><circle cx="36" cy="60" r="3"/><circle cx="48" cy="42" r="3"/></g></svg>`,
+        ring: `<svg ${common} aria-label="anel"><rect width="132" height="132" fill="#fff8df"/><circle cx="66" cy="72" r="34" fill="none" stroke="#8f5bff" stroke-width="12"/><path d="M51 32 L66 16 L81 32 Z" fill="#2f80ed"/></svg>`,
+        frog: `<svg ${common} aria-label="sapo"><rect width="132" height="132" fill="#eefdf1"/><circle cx="66" cy="72" r="38" fill="#23a455"/><circle cx="48" cy="43" r="14" fill="#23a455"/><circle cx="84" cy="43" r="14" fill="#23a455"/><circle cx="48" cy="43" r="5" fill="#203040"/><circle cx="84" cy="43" r="5" fill="#203040"/></svg>`,
+        candy: `<svg ${common} aria-label="doce"><rect width="132" height="132" fill="#fff0f5"/><path d="M38 55 L16 38 L24 78 ZM94 55 L116 38 L108 78 Z" fill="#8f5bff"/><rect x="38" y="46" width="56" height="38" rx="18" fill="#e7549a"/></svg>`,
+        fire: `<svg ${common} aria-label="fogo"><rect width="132" height="132" fill="#fff0e4"/><path d="M69 113 C35 96 42 65 63 43 C61 63 85 65 80 25 C108 56 105 99 69 113 Z" fill="#e64b4b"/><path d="M68 103 C52 92 58 75 70 62 C70 77 86 80 83 58 C98 80 91 100 68 103 Z" fill="#f2bd22"/></svg>`,
+        drop: `<svg ${common} aria-label="gota"><rect width="132" height="132" fill="#eaf6ff"/><path d="M66 18 C90 50 102 70 91 94 C80 116 52 116 41 94 C30 70 42 50 66 18 Z" fill="#2f80ed"/></svg>`,
+        helicopter: `<svg ${common} aria-label="helicóptero"><rect width="132" height="132" fill="#eaf6ff"/><path d="M38 66 C48 42 88 42 98 66 C103 78 91 91 67 91 C43 91 31 78 38 66 Z" fill="#8f5bff"/><rect x="63" y="30" width="8" height="20" fill="#203040"/><path d="M28 28 H104" stroke="#203040" stroke-width="6" stroke-linecap="round"/><path d="M96 68 L118 58 L118 78 Z" fill="#2f80ed"/></svg>`,
+        alligator: `<svg ${common} aria-label="jacaré"><rect width="132" height="132" fill="#eefdf1"/><path d="M16 74 C38 44 86 45 118 68 C88 83 43 88 16 74 Z" fill="#23a455"/><circle cx="55" cy="57" r="6" fill="#203040"/></svg>`,
+        pencil: `<svg ${common} aria-label="lápis"><rect width="132" height="132" fill="#fff8df"/><path d="M28 92 L86 34 L101 49 L43 107 L24 111 Z" fill="#f2bd22"/><path d="M86 34 L96 24 L111 39 L101 49 Z" fill="#e64b4b"/></svg>`,
+        apple: `<svg ${common} aria-label="maçã"><rect width="132" height="132" fill="#fff0f5"/><path d="M67 43 C77 30 88 28 98 41 C111 58 101 101 80 108 C72 111 65 105 61 105 C57 105 50 111 42 108 C21 101 18 59 31 43 C41 31 53 35 61 43 Z" fill="#e64b4b"/><path d="M64 40 C63 27 71 21 81 18" stroke="#203040" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M75 28 C89 25 96 31 100 39 C88 42 80 38 75 28 Z" fill="#23a455"/></svg>`
+      };
+      return svgs[kind];
+    }
+
+    function renderWords() {
+      const box = document.getElementById('wordGrid');
+      box.innerHTML = '';
+      words.forEach(item => {
+        const tile = document.createElement('div');
+        tile.className = 'wordTile';
+        tile.dataset.name = item.name;
+        tile.innerHTML = `${pictureSvg(item.image)}<span class="nameText">${item.name}</span>`;
+        box.appendChild(tile);
+      });
+    }
+
+    function newWord() {
+      currentWord = randomFrom(words);
+      document.querySelectorAll('.wordTile').forEach(tile => tile.classList.toggle('active', tile.dataset.name === currentWord.name));
+      document.getElementById('wordPicture').innerHTML = pictureSvg(currentWord.image);
+      document.getElementById('wordName').textContent = currentWord.name;
+      document.getElementById('wordHint').textContent = `Desenho: ${currentWord.spoken}.`;
+      document.getElementById('wordInput').value = '';
+      document.getElementById('wordMsg').textContent = `Copie: ${currentWord.name}`;
+      highlightFinger(currentWord.name[0]);
+      document.getElementById('wordInput').focus();
+    }
+
+    function checkWord() {
+      const value = normalizeText(document.getElementById('wordInput').value);
+      if (value === currentWord.name) {
+        document.getElementById('wordMsg').textContent = 'Palavra copiada certinho!';
+        addStar(2);
+        setTimeout(newWord, 900);
+      } else if (value.length >= currentWord.name.length) {
+        document.getElementById('wordMsg').textContent = 'Compare com a palavra do cartão.';
+      } else if (value) {
+        const last = value.slice(-1);
+        if (keys.some(item => item.letter === last)) highlightFinger(last);
+      }
+    }
+
+    function newSpace() {
+      const first = randomFrom(students);
+      let second = randomFrom(students);
+      if (second === first) second = randomFrom(students);
+      currentSpace = `${first} ${second}`;
+      document.getElementById('spacePrompt').textContent = currentSpace;
+      document.getElementById('spaceInput').value = '';
+      document.getElementById('spaceMsg').textContent = 'Copie os nomes e use o dedão no espaço.';
+      highlightFinger(' ');
+      document.getElementById('spaceInput').focus();
+    }
+
+    function checkSpace() {
+      const value = normalizeText(document.getElementById('spaceInput').value);
+      if (value === currentSpace) {
+        document.getElementById('spaceMsg').textContent = 'Espaço usado certinho!';
+        addStar(2);
+        setTimeout(newSpace, 900);
+      } else if (value.length >= currentSpace.length) {
+        document.getElementById('spaceMsg').textContent = 'Veja se o espaço ficou entre os nomes.';
+      }
+    }
+
+    function newFinal() {
+      const item = randomFrom(imagePrompts);
+      finalInitial = item.letter;
+      document.getElementById('finalPicture').innerHTML = pictureSvg(item.image);
+      document.getElementById('finalPrompt').textContent = item.letter;
+      document.getElementById('finalInput').value = '';
+      document.getElementById('finalMsg').textContent = `Digite ${item.letter}, inicial de ${item.name}.`;
+      highlightFinger(finalInitial);
+      document.getElementById('finalInput').focus();
+    }
+
+    function checkFinal() {
+      const value = normalizeText(document.getElementById('finalInput').value);
+      if (value === finalInitial || (finalInitial === 'Ç' && value === 'C')) {
+        document.getElementById('finalMsg').textContent = 'Muito bem! Missão completa.';
+        addStar();
+        setTimeout(newFinal, 900);
+      } else if (value) {
+        document.getElementById('finalMsg').textContent = 'Olhe a primeira letra e tente outra vez.';
+      }
+    }
+
+    document.getElementById('modalNameInput').addEventListener('input', checkModalName);
+    document.getElementById('modalClose').addEventListener('click', closeNameModal);
+    document.getElementById('modalStart').addEventListener('click', () => {
+      closeNameModal();
+      showScreen(1);
+    });
+    document.getElementById('modalNameInput').addEventListener('keydown', event => {
+      if (event.key === 'Enter' && !document.getElementById('modalStart').disabled) {
+        closeNameModal();
+        showScreen(1);
+      }
+    });
+    document.getElementById('letterInput').addEventListener('input', checkLetter);
+    document.getElementById('nameInput').addEventListener('input', checkName);
+    document.getElementById('wordInput').addEventListener('input', checkWord);
+    document.getElementById('spaceInput').addEventListener('input', checkSpace);
+    document.getElementById('finalInput').addEventListener('input', checkFinal);
+
+    document.getElementById('restartAll').addEventListener('click', () => {
+      stars = 0;
+      addStar(0);
+      newLetter();
+      newName();
+      newWord();
+      newSpace();
+      newFinal();
+      showScreen(0);
+    });
+
+    renderNameCloud('nameCloud', true);
+    renderNameCloud('copyNameCloud');
+    renderNameCloud('finalCloud');
+    renderKeys('homeRow');
+    renderKeys('letterKeys');
+    renderKeys('spaceKeys');
+    copyHandsToPanels();
+    renderWords();
+    newLetter();
+    newName();
+    newWord();
+    newSpace();
+    newFinal();
+    showScreen(0);
+  </script>
 </body>
 </html>
